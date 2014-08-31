@@ -72,7 +72,7 @@ BEGIN_MESSAGE_MAP(CStudentDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_ABOUT, &CStudentDlg::OnButton_About)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST, &CStudentDlg::On_Dblclk_List) 
 	ON_NOTIFY(LVN_KEYDOWN, IDC_LIST, &CStudentDlg::OnLvnKeydownList)
-	ON_BN_CLICKED(IDC_ADD_RAND, &CStudentDlg::OnButton_AddRand)
+	ON_BN_CLICKED(IDC_BUTTON_ADD_RAND, &CStudentDlg::OnButton_AddRand)
 	ON_NOTIFY(HDN_ITEMCLICK, 0, &CStudentDlg::OnHdnItemclickList)
 END_MESSAGE_MAP()
 
@@ -111,7 +111,7 @@ BOOL CStudentDlg::OnInitDialog()
 	file_CArchive = "CArchive__Test.txt";				// name of serialization file
 	int width = 16;										// width of image
 	int length = 16;									// length of image
-	
+	int rand_count = 20;								// count of new Items fo first start
 
 	// Create of colums in LIST
 	m_list_ctrl.InsertColumn(0, _T("name"), LVCFMT_LEFT, 200);
@@ -148,7 +148,7 @@ BOOL CStudentDlg::OnInitDialog()
 	}
 
 	// serialization
-	Serialize(file_CArchive, CArchive::load);
+	Serialize(file_CArchive, CArchive::load, rand_count);
 
 	//	Rebuild of LIST
 	FillList();
